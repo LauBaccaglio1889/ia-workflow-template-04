@@ -77,7 +77,7 @@ git rev-parse --verify {epic_branch} 2>/dev/null
 
 ### 2.3 Confirm Predecessors Committed
 
-Story commits are sequential on the epic branch. If a previous story for this PRD is `in-review` or `done` but has no `commit` SHA in its frontmatter, warn the user — earlier work may be uncommitted on the same branch.
+Story commits are sequential on the epic branch. If a previous story for this PRD is `done` but has no `commit` SHA in its frontmatter, warn the user — earlier work may be uncommitted on the same branch.
 
 ---
 

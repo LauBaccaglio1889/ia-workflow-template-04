@@ -127,6 +127,13 @@ All stories commit on the epic branch `epic/{PRD-ID}-{slug}`. No per-story branc
 - Note constraints/preferences
 - If critical info missing, ask before generating. Wait for response.
 
+### Phase 1b: SCAN SKILLS (mandatory)
+- List `.agents/skills/` directories
+- Read every `SKILL.md` whose `description` frontmatter matches the product domain (UI flows, browser automation, data, auth, etc.)
+- Extract: tech-stack constraints, conventions, allowed tools, required workflows
+- Cite these rules verbatim inside Sections 6 (Architecture), 8 (Tech Stack), 9 (Security), 11 (Success Criteria) where they apply
+- Record skill names used in the `Appendix` section as `Skills referenced: <name>, <name>`
+
 ### Phase 2: SYNTHESIZE
 - Organize into sections, fill assumptions, ensure feasibility
 

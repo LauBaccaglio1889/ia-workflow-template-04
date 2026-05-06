@@ -29,7 +29,7 @@ Resolve input:
 
 Extract from frontmatter:
 - PRD: `id`, `slug`, `status`, `base_branch`, `epic_branch`
-- Story: `id`, `status`, `branch`, `plan`, `depends_on`, `blocks`, `complexity`
+- Story: `id`, `status`, `epic_branch`, `plan`, `commit`, `depends_on`, `blocks`, `complexity`
 
 Read story bodies for: description, acceptance criteria, technical notes.
 
@@ -54,7 +54,7 @@ Scannable summary:
 - **Active PRD**: `{PRD-ID}` — {title} (status: {status})
 - **Epic Branch**: `{epic_branch}` (base: `{base_branch}`)
 - **Story Progress**: {done}/{total} done, {in-progress} in flight, {blocked} blocked
-- **Active Story** (if specified): `{STORY-ID}` — {title} (status: {status}, branch: `{branch}`)
+- **Active Story** (if specified): `{STORY-ID}` — {title} (status: {status}, commit: `{commit or "—"}`)
   - Acceptance criteria summary
   - Dependencies status (blocked-by satisfied? Y/N)
 - **Project Purpose**: one sentence

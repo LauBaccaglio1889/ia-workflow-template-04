@@ -32,6 +32,16 @@ Extract from PRD body:
 
 ---
 
+## Phase 1b: SCAN SKILLS (mandatory)
+
+- List `.agents/skills/` directories
+- Read every `SKILL.md` whose `description` matches the PRD domain
+- Extract tech-stack rules, allowed tools, required workflows
+- For each story: cite applicable skill rules in **Technical Notes** (verbatim, not paraphrased)
+- Add `skills: [<name>, ...]` field to story frontmatter listing skills the implementer must consult
+
+---
+
 ## Phase 2: ANALYZE
 
 ### Break Down into Stories
@@ -79,7 +89,7 @@ type: feature              # feature | enhancement | bug | technical | spike
 priority: high             # high | medium | low
 complexity: small          # small | medium | large
 phase: {phase number/name from PRD}
-status: todo               # todo | in-progress | in-review | done | blocked
+status: todo               # todo | in-progress | done | blocked
 labels: [backend, api]
 epic_branch: {epic_branch from PRD}   # all stories commit on this branch — no per-story branch
 plan: null                 # filled when /plan runs
@@ -87,6 +97,7 @@ report: null               # filled when /implement completes
 commit: null               # filled when /implement commits the story (SHA)
 depends_on: []             # list of STORY-NNN IDs
 blocks: []                 # list of STORY-NNN IDs
+skills: []                 # skill names from .agents/skills/ that apply to this story
 created: {YYYY-MM-DD}
 updated: {YYYY-MM-DD}
 ---
@@ -151,7 +162,6 @@ All stories commit on the epic branch `{epic_branch}`. No per-story branches.
 ## Status Icons
 - ⬜ todo
 - 🟡 in-progress
-- 🔵 in-review
 - ✅ done
 - 🔴 blocked
 
@@ -164,7 +174,6 @@ All stories commit on the epic branch `{epic_branch}`. No per-story branches.
 Status icon mapping (use exactly):
 - `todo` → ⬜
 - `in-progress` → 🟡
-- `in-review` → 🔵
 - `done` → ✅
 - `blocked` → 🔴
 

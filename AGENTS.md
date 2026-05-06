@@ -101,13 +101,53 @@ cd backend && uvicorn app.main:app --reload
 
 ---
 
+## Development Flow
+
+One PRD = one epic = one branch. Stories implemented sequentially on the epic branch, one commit per story. Commands are user-invoked (`/<name>`); skills auto-trigger from context.
+
+| Phase | Session | Command (user runs) | Output |
+|-------|---------|---------------------|--------|
+| 1. Discovery | new | _(free-form prompt: sprint goal, unstructured)_ | shared context |
+| 2. Clarification QA | same as 1 | _(agent asks until no ambiguity remains)_ | full requirements |
+| 3. PRD | same as 1 | `/create-prd <slug>` | `.agents/PRDs/<slug>.md` + epic branch |
+| 4. Stories | new | `/create-stories <PRD>` | `.agents/stories/*.md` |
+| 5. Prime (per story) | new | `/prime <STORY-ID>` | codebase + story context loaded |
+| 6. Plan (per story) | same as 5 | `/plan <STORY-ID>` | `.agents/plans/<story>.md` |
+| 7. Implement (per story) | same as 5 | `/implement <plan>` | code + commit on epic branch |
+| 8. Validate | same as 5 | `/validate` | lint + build report |
+| 9. Review | any | `/review` or `/security-review` | findings |
+
+Loop phases 5–8 per story `1..N`. Open PR from epic branch → main when all stories done.
+
+Auxiliary commands: `/prime-client`, `/prime-server`, `/prime-endpoint`, `/prime-components` for narrower onboarding; `/prd-interactive` as alternative to phases 1–3; `/create-rules` to bootstrap `AGENTS.md`; `/install` for deps + dev server.
+
+---
+
+## Skills
+
+Skills carry tech-stack-specific patterns, conventions, and constraints. **Agent MUST scan `.agents/skills/*/SKILL.md` when drafting PRDs, user stories, and implementation plans**, and cite relevant skill rules inside those artifacts (acceptance criteria, plan steps, tech notes). Skills also contain reusable how-tos the agent invokes during `/implement`.
+
+| Skill | Path | Trigger / use |
+|-------|------|---------------|
+| agent-browser | `.agents/skills/agent-browser/SKILL.md` | UI/E2E verification, screenshots, form filling, navigation checks |
+
+Locked skill registry: `skills-lock.json` (top-level). Add new skills under `.agents/skills/<name>/SKILL.md` with frontmatter `name` + `description` + `allowed-tools`.
+
+**Required behavior when generating artifacts:**
+1. Before writing PRD / story / plan, list `.agents/skills/` and read each `SKILL.md` whose description matches the feature domain.
+2. Embed concrete constraints from those skills into acceptance criteria and plan steps (do not paraphrase vaguely — quote the rule).
+3. Name the skill explicitly in plan steps that depend on it (e.g., `Step 4: verify login flow with agent-browser`).
+
+---
+
 ## On-Demand Context
 
 | Topic | File |
 |-------|------|
 | Frontend patterns, routing, components | `frontend/AGENT.md` |
 | Backend architecture, resource pattern | `backend/AGENT.md` |
-| Skill definitions | `.agents/commands/` |
+| Command definitions | `.agents/commands/*.md` |
+| Skill definitions | `.agents/skills/*/SKILL.md` |
 
 ---
 

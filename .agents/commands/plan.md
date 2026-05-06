@@ -30,7 +30,7 @@ Resolve input to a story file:
 
 Read story frontmatter:
 - `id`, `prd`, `slug`, `title`, `type`, `complexity`
-- `branch`, `base_branch`
+- `epic_branch`
 - `depends_on`, `blocks`
 - `status` (must be `todo` or `in-progress`)
 
@@ -39,6 +39,16 @@ If `status: blocked` → STOP, report blocker.
 If `depends_on` non-empty, verify each dependency `status: done`. If not, warn user and ask whether to proceed.
 
 Read parent PRD for architecture context: `.agents/PRDs/{prd}/PRD.md`.
+
+---
+
+## Phase 1b: SCAN SKILLS (mandatory)
+
+- Read `skills` field from story frontmatter (if populated by `/create-stories`)
+- List `.agents/skills/` and read each referenced `SKILL.md` in full
+- Also read any `SKILL.md` whose `description` matches the story domain even if not listed
+- Extract: required tools, allowed-tools restrictions, command syntax, workflow constraints
+- Carry these rules into Phase 3 design and Phase 4 task steps — name the skill explicitly in any task that depends on it (e.g., `Validate via agent-browser snapshot + click flow`)
 
 ---
 
@@ -125,6 +135,14 @@ So that {benefit}
 | Story | {STORY-ID} |
 | PRD | {PRD-ID} |
 | Epic Branch | `{epic branch}` (commit directly on this branch) |
+
+---
+
+## Skills In Use
+
+| Skill | Why it applies | Tasks affected |
+|-------|---------------|----------------|
+| {skill-name} | {rule from SKILL.md} | Task {N}, Task {M} |
 
 ---
 
